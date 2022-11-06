@@ -102,8 +102,21 @@ public class Reciepe {
                     System.out.println("update data");
                 case 5:
                     System.out.println("delete data");
-
+                    System.out.println("enter price:");
+                    price=s.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/reciepedb","root","");
+                        String sql="DELETE FROM `reciepe` WHERE `price`="+price;
+                        Statement stmt =con.createStatement();
+                        stmt.executeUpdate(sql);
+                        System.out.println("deleted successfully");
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
                     break;
+
                 case 6:
                     System.out.println("exit");
                     break;
