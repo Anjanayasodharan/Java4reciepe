@@ -51,7 +51,27 @@ public class Reciepe {
                     }
                 case 2:
                     System.out.println("select data");
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/reciepedb","root","");
+                        String sql="SELECT  `name`, `category`, `taste`, `price` FROM `reciepe` ";
+                        Statement stmt = con.createStatement();
+                        ResultSet rs= stmt.executeQuery(sql);
+                        while (rs.next()){
+                            String getname=rs.getString("name");
+                            String getcategory=rs.getString("category");
+                            String gettaste=rs.getString("taste");
+                            String getprice=rs.getString("price");
+                            System.out.println("recipename="+getname);
+                            System.out.println("preparedby="+getcategory);
+                            System.out.println("ingredients="+gettaste);
+                            System.out.println("price="+getprice);
+                        }
 
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
                     break;
                 case 3:
                     System.out.println("search data");
